@@ -1,0 +1,205 @@
+<br>
+<div>
+<div class="container">
+
+    <h1>Enter The Location to get the weather Forecast :</h1>
+    <br>
+    <form class="d-flex" (ngSubmit)="onSubmit()">
+        <input type="search" name="location" [(ngModel)]="location"  class="form-control me-2" (keyup)="sendData($event)"  aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+    <br>
+</div>
+
+
+<ngx-spinner
+  bdColor="rgba(101, 132, 139, 0.507)"
+  size="medium"
+  color="#fff"
+  type="ball-spin-clockwise"
+>
+<div class="spinner-border" role="status" style="color: #f1f1f1;">
+</div>
+</ngx-spinner>
+
+
+<div class="container" *ngIf="flag">
+    <div class="card1">
+      <div class="top-left">
+        <h1 class="fw-bold fs-3" id="city">{{weatherLocation | uppercase}}</h1>
+        <h2 class="mt-18 fw-bolder fs-4" >{{dayOfWeek}}</h2>
+        <h3 class="fs-5 fw-normal">{{month}}, {{day}} {{year}}</h3>
+        <h3 class="fs-5 fw-normal">{{time}}</h3>
+      </div>
+      <div class="top-right">
+        <h1 *ngFor="let data of weatherData">
+          <h1 id="weather-status" class="fw-bold fs-3 text-center">{{data['description'] | uppercase}}</h1>
+        </h1>
+        <img *ngFor="let data of weatherData" src="http://openweathermap.org/img/wn/{{data.icon}}@2x.png">
+      </div>
+      <div class="horizontal-half-divider"></div>
+      <div class="bottom-left">
+        <h1 class="fw-bold ms-2" id="temperature" style="font-size: 50px;">{{weather.main.temp | number : '1.0-0'}}<span>&#8451;</span>/</h1>
+        <h2 class="fs-3 fw-light" id="fahrenheit">{{(((weather.main.temp))*9/5)+32 | number : '1.0-0' }}<span>&#8457;</span></h2>
+      </div>
+      <div class="vertical-half-divider"></div>
+      <div class="bottom-right">
+        <div class="other-details-key">
+          <p><b> Wind Speed</b></p>
+          <p><b>Humidity</b></p>
+          <p><b>Pressure</b></p>
+        </div>
+        <div class="other-details-values">
+          <p class="windspeed"> {{weather.wind.speed*3.6 | number : '1.0-0'}} Km/h</p>
+          <p class="humidity">{{weather.main.humidity}} %</p>
+          <p class="pressure">{{weather.main.pressure}} hPa</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="flag">
+  <div class="card2">
+    <div class="columns">
+      <div class="column">
+        <div class="row">
+          <div class="col">
+            <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;" >{{hourlyTemp[0] | number : '1.0-0'}}&deg;</div>
+            <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[0]}}@2x.png"></div>
+            <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[0]}}</div>
+            <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[0]}} </div>
+          </div>
+            <div class="col">
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[1] | number : '1.0-0'}}&deg;</div>
+              <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[1]}}@2x.png"></div>
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[1]}}</div>
+              <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[1]}} </div>
+            </div>
+            <div class="col">
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[2] | number : '1.0-0'}}&deg;</div>
+              <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[2]}}@2x.png"></div>
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[2]}}</div>
+              <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[2]}} </div>
+            </div>
+            <div class="col">
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[3] | number : '1.0-0'}}&deg;</div>
+              <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[3]}}@2x.png"></div>
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[3]}}</div>
+              <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[3]}} </div>
+            </div>
+            <div class="col">
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[4] | number : '1.0-0'}}&deg;</div>
+              <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[4]}}@2x.png"></div>
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[4]}}</div>
+              <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[4]}} </div>
+            </div>
+            <div class="col">
+                <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[5] | number : '1.0-0'}}&deg;</div>
+                <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[5]}}@2x.png"></div>
+                <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[5]}}</div>
+                <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[5]}} </div>
+            </div>
+            <div class="col">
+                  <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[6] | number : '1.0-0'}}&deg;</div>
+                  <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[6]}}@2x.png"></div>
+                  <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[6]}}</div>
+                  <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[6]}} </div>
+            </div>
+            <div class="col">
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{hourlyTemp[7] | number : '1.0-0'}}&deg;</div>
+              <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{hourlyForecastIcon[7]}}@2x.png"></div>
+              <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{hourlyTime[7]}}</div>
+              <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{hourlyMeridian[7]}} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container" *ngIf="flag">
+<div class="card2">
+  <div class="columns">
+    <div class="column">
+      <div class="row">
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[0] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[0]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[0]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[0]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[1] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[1]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[1]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[1]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[2] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[2]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[2]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[2]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[3] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[3]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[3]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[3]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[4] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[4]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[4]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[4]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[5] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[5]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[5]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[5]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[6] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[6]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[6]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[6]}} </div>
+        </div>
+        <div class="col">
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.7rem;">{{dailyTemp[7] | number : '1.0-0'}}&deg;</div>
+          <div class="row d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/{{dailyForecastIcon[7]}}@2x.png"></div>
+          <div class="row d-flex justify-content-center fw-bold" style="font-size: 0.9rem;">{{DatesForDailyForecast[7]}}</div>
+          <div class="row d-flex justify-content-center" style="font-size: 0.7rem; color: rgb(179, 84, 84);"> {{dailyForecastWeekDays[7]}} </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container card2">
+  <div class="row">
+    <div class="col">
+      <div>
+        <div class="text-center fs-4 fw-bold text-decoration-underline">
+          HOURLY FORECAST
+        </div>
+        <canvas id="hourlyChart"></canvas>  
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <div class="text-center fs-4 fw-bold text-decoration-underline">
+          DAILY FORECAST
+        </div>
+        <canvas id="dailyChart"></canvas>  
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="container" *ngIf="errorflag">
+  <div class="alert" role="alert" style="background-color: rgba(101, 132, 139, 0.507)">
+    {{errorMessage}}
+  </div>
+</div>

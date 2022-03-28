@@ -1,0 +1,87 @@
+.card1 {
+    width: 700px;
+    height: 360px;
+    display: block;
+    border-radius: 25px;
+    margin: 0 auto;
+    background: linear-gradient(to right, rgba(101, 142, 151, 0.507) , #d6a3a3 );
+}
+
+.top-left {
+    height: 60%;
+    width: 50%;
+    padding: 40px 0 0 70px;
+    display: inline-block;
+  }
+  
+  .top-right {
+    height: 60%;
+    width: 50%;
+    float: right;
+    padding: 40px 0 0 0;
+  }
+  
+  .bottom-left {
+    height: 40%;
+    width: 45%;
+    float: left;
+    margin: 0;
+    padding: 40px 0 0 50px;
+  }
+  
+  .bottom-right {
+    height: 40%;
+    width: 55%;
+    float: right;
+    padding: 25px 0 0 60px;
+  }
+  
+  .top-right > img {
+    width: 120px;
+    height: 120px;
+    align-items: center;
+    display: block;
+    margin: 15px auto 0 auto;
+  }
+  
+  .horizontal-half-divider {
+    width: 100%;
+    height: 3px;
+    margin-top: -5px;
+    background-color: #263238;
+  }
+  
+  .vertical-half-divider {
+    width: 3px;
+    position: absolute;
+    height: 146px;
+    background-color: #263238;
+    display: inline-block;
+    padding: 0;
+  }
+  
+  #temperature,
+  #fahrenheit {
+    display: inline;
+    vertical-align: middle;
+  }
+
+  .other-details-key {
+    float: left;
+    font-size: 16px;
+  }
+  
+  .other-details-values {
+    float: left;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 40px;
+  }
+
+.card2 {
+    padding: 1.2rem 3rem 1.2rem 3rem;
+    margin: 1rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(to right, rgba(101, 142, 151, 0.507) 30%, #d6a3a3 );
+    width: 1075px;
+}
